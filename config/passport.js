@@ -51,17 +51,15 @@ passport.use('login', new LocalStratery({
   passReqToCallback: true
 },
   function (req, username, password, done) {
-    User.findOne({ 'username': username }, function (err, user) {
+    User.findOne({ $or: [{ 'username': username }, { 'email': username }] }, function (err, user) {
       if (err) {
         console.log("db error");
         return done(err);
       }
       if (!user) {
-        console.log("err1");
-        return done(null, false, req.flash('error', "No User Found."));
+        return done(null, false, req.flash('error', "No User Found!"));
       }
       if (!user.validPassword(password)) {
-        console.log("err2");
         return done(null, false, req.flash('error', "Wrong Password"));
       }
       return done(null, user, req.flash('success', "Successfully logged in"));

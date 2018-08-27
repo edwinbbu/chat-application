@@ -3,7 +3,7 @@ var router = express.Router();
 require('../config/passport')
 
 router.route('/')
-    .get(function (req, res) {
+    .get(isLoggedIn,function (req, res) {
         res.render('index');
     });
 

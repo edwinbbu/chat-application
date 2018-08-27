@@ -4,12 +4,14 @@
             <header>
                 <h1>Chat Application </h1>
             </header>
-
             <section>
-                <div id="change_username">
-                    <input id="username" type="text" />
-                    <button id="send_username" type="button">Change username</button>
-                </div>
+                <h3>
+                    <% if (user) { %>
+                       Hi <%= user.username%>
+                        <% } else { %>
+                          Hi Anonymous
+                            <% } %>
+                </h3>
             </section>
             <br><br>
             <section id="chatroom" style="background-color: lightgray;">>
