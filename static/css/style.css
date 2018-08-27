@@ -27,27 +27,11 @@
       font-family: 'Comfortaa', sans-serif;
       margin: 0px;
   }
-  
-  div#change_username, section#input_zone {
-      border: 5px outset #6c757d;
-  }
-  
-  div#change_username {
-      height: 3%;
-      display: inline-block;
-      background-color: #6c757d;
-  }
-  
+   
   section#chatroom {
       border: 5px inset #6c757d;
       height: 85%;
       overflow: auto;
-  }
-  
-  section#input_zone {
-      height: 7%;
-      text-align: center;
-      background-color: #6c757d;
   }
   
   .vertical-align {
