@@ -7,13 +7,15 @@
             <section>
                 <h3>
                     <% if (user) { %>
-                       Hi <%= user.username%>
-                        <% } else { %>
-                          Hi Anonymous
-                            <% } %>
+                        Hi
+                        <%= user.username %>
+                            <% } else { %>
+                                Hi Anonymous
+                                <% } %>
                 </h3>
             </section>
-            <br><br>
+            <br>
+            <br>
             <section id="chatroom" style="background-color: lightgray;">>
                 <section id="feedback"></section>
             </section>
@@ -25,7 +27,28 @@
             <!-- Bootstrap core JavaScript -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
             <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-            <script src="chat.js"></script>
+            <script>
+                $(function () {
+                    var socket = io.connect('http://localhost:8000');
+                    var message = $("#message");
+                    var username = '<%= user.username %>';
+                    var send_message = $("#send_message");
+                    var chatroom = $("#chatroom");
+                    console.log(username);
+                    socket.emit('change_username', { username: username });
+                    send_message.click(function () {
+                        socket.emit('new_message', { message: message.val() });
+                    });
+
+                    socket.on('new_message', (data) => {
+                        console.log(data);
+                        chatroom.append("<p class='message'>" + data.username + ":" + data.message + "</p>");
+                    });
+
+
+
+                });
+            </script>
 
         </div>
     </div>
